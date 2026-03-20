@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Meeting Minute — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    nav a { margin-right: 12px; }
+    label { display: block; font-size: 0.85rem; color: #444; margin-top: 14px; margin-bottom: 2px; }
+    input[type=text], input[type=date], select, textarea {
+      width: 100%; box-sizing: border-box;
+      font-family: monospace; font-size: 0.9rem;
+      border: 1px solid #ccc; padding: 6px 8px;
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    .hint { font-size: 0.78rem; color: #888; margin-top: 3px; }
+    .req { color: #900; }
+    button { margin-top: 22px; padding: 6px 18px; font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    .error { white-space: pre-wrap; color: #721c24; background: #f8d7da; padding: 10px 12px; margin-top: 16px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/ui/">← Dashboard</a>
+    <a href="/ui/projects/{{ project_id }}">← Project</a>
+  </nav>
+  <h1>Add Meeting Minute</h1>
+  <p class="sub">Project ID: {{ project_id }}</p>
+
+  <form id="form">
+    <input type="hidden" name="project_id" value="{{ project_id }}">
+
+    <label>Meeting Date <span class="req">*</span></label>
+    <input type="date" name="meeting_date" required>
+
+    <label>Meeting Type <span class="req">*</span></label>
+    <select name="meeting_type" required>
+      <option value="">— select —</option>
+      <option value="OAC">OAC</option>
+      <option value="design_review">Design Review</option>
+      <option value="pre_construction">Pre-Construction</option>
+      <option value="closeout">Closeout</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label>Attendees <span class="req">*</span></label>
+    <input type="text" name="attendees" required placeholder="Architect, Owner, Contractor">
+    <p class="hint">Comma-separated</p>
+
+    <label>Agenda Items</label>
+    <textarea name="agenda_items" placeholder="One item per line"></textarea>
+    <p class="hint">Optional — one item per line</p>
+
+    <button type="submit">Save Minute</button>
+  </form>
+
+  <div id="err" class="error" style="display:none"></div>
+
+  <script>
+    const projectId = {{ project_id | tojson }};
+
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('err').style.display = 'none';
+      const fd = new FormData(this);
+      const body = {
+        project_id: projectId,
+        meeting_date: fd.get('meeting_date'),
+        meeting_type: fd.get('meeting_type'),
+        attendees: fd.get('attendees').split(',').map(s => s.trim()).filter(s => s !== ''),
+        action_items: [],
+      };
+      const agenda = fd.get('agenda_items').trim();
+      body.agenda_items = agenda !== ''
+        ? agenda.split('\n').map(s => s.trim()).filter(s => s !== '')
+        : [];
+
+      fetch('/minutes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      .then(r => r.json().then(d => ({ status: r.status, data: d })))
+      .then(({ status, data }) => {
+        if (status === 200) {
+          window.location = '/ui/projects/' + projectId;
+        } else {
+          showError(data.detail);
+        }
+      })
+      .catch(() => showError('Could not reach server.'));
+    });
+
+    function showError(detail) {
+      const el = document.getElementById('err');
+      el.textContent = Array.isArray(detail)
+        ? detail.map(e => (e.loc ? e.loc.join('.') + ': ' : '') + e.msg).join('\n')
+        : (typeof detail === 'string' ? detail : JSON.stringify(detail, null, 2));
+      el.style.display = '';
+    }
+  </script>
+</body>
+</html>

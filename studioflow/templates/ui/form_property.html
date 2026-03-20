@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Property — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    nav a { margin-right: 12px; }
+    label { display: block; font-size: 0.85rem; color: #444; margin-top: 14px; margin-bottom: 2px; }
+    input[type=text], input[type=number] {
+      width: 100%; box-sizing: border-box;
+      font-family: monospace; font-size: 0.9rem;
+      border: 1px solid #ccc; padding: 6px 8px;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .two-col label { margin-top: 14px; }
+    .req { color: #900; }
+    button { margin-top: 22px; padding: 6px 18px; font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    .error { white-space: pre-wrap; color: #721c24; background: #f8d7da; padding: 10px 12px; margin-top: 16px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/ui/">← Dashboard</a>
+    <a href="/ui/projects/{{ project_id }}">← Project</a>
+  </nav>
+  <h1>Add Property</h1>
+  <p class="sub">Project ID: {{ project_id }}</p>
+
+  <form id="form">
+    <input type="hidden" name="project_id" value="{{ project_id }}">
+
+    <label>Address <span class="req">*</span></label>
+    <input type="text" name="address" required>
+
+    <label>Town <span class="req">*</span></label>
+    <input type="text" name="town" required>
+
+    <div class="two-col">
+      <div>
+        <label>Map</label>
+        <input type="text" name="map">
+      </div>
+      <div>
+        <label>Lot</label>
+        <input type="text" name="lot">
+      </div>
+    </div>
+
+    <label>Zoning District</label>
+    <input type="text" name="zoning_district">
+
+    <div class="two-col">
+      <div>
+        <label>Existing SF</label>
+        <input type="number" name="sf_existing_total" step="any" min="0">
+      </div>
+      <div>
+        <label>Total Project Cost ($)</label>
+        <input type="number" name="total_project_cost" step="any" min="0">
+      </div>
+    </div>
+
+    <button type="submit">Save Property</button>
+  </form>
+
+  <div id="err" class="error" style="display:none"></div>
+
+  <script>
+    const projectId = {{ project_id | tojson }};
+    const NUM_FIELDS = ['sf_existing_total', 'total_project_cost'];
+
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('err').style.display = 'none';
+      const fd = new FormData(this);
+      const body = { project_id: projectId };
+      body.address = fd.get('address').trim();
+      body.town = fd.get('town').trim();
+      ['map', 'lot', 'zoning_district'].forEach(k => {
+        const v = fd.get(k).trim();
+        if (v !== '') body[k] = v;
+      });
+      NUM_FIELDS.forEach(k => {
+        const v = fd.get(k).trim();
+        if (v !== '') body[k] = parseFloat(v);
+      });
+
+      fetch('/properties', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      .then(r => r.json().then(d => ({ status: r.status, data: d })))
+      .then(({ status, data }) => {
+        if (status === 200) {
+          window.location = '/ui/projects/' + projectId;
+        } else {
+          showError(data.detail);
+        }
+      })
+      .catch(() => showError('Could not reach server.'));
+    });
+
+    function showError(detail) {
+      const el = document.getElementById('err');
+      el.textContent = Array.isArray(detail)
+        ? detail.map(e => (e.loc ? e.loc.join('.') + ': ' : '') + e.msg).join('\n')
+        : (typeof detail === 'string' ? detail : JSON.stringify(detail, null, 2));
+      el.style.display = '';
+    }
+  </script>
+</body>
+</html>

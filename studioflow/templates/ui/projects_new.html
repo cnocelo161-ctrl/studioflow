@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Project — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    nav a { margin-right: 12px; }
+    label { display: block; font-size: 0.85rem; color: #444; margin-top: 14px; margin-bottom: 2px; }
+    input[type=text], select {
+      width: 100%; box-sizing: border-box;
+      font-family: monospace; font-size: 0.9rem;
+      border: 1px solid #ccc; padding: 6px 8px;
+      background: #fff;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .req { color: #900; }
+    fieldset { border: 1px solid #ccc; padding: 10px 14px; margin-top: 14px; }
+    legend { font-size: 0.85rem; color: #444; padding: 0 4px; }
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px 0; margin-top: 6px; }
+    .check-row { display: flex; align-items: center; gap: 7px; font-size: 0.85rem; color: #333; }
+    .check-row input { width: auto; }
+    .hint { font-size: 0.78rem; color: #888; margin-top: 3px; }
+    button { margin-top: 22px; padding: 6px 18px; font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    .error { white-space: pre-wrap; color: #721c24; background: #f8d7da; padding: 10px 12px; margin-top: 16px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/ui/">← Dashboard</a>
+    <a href="/ui/projects">← Projects</a>
+  </nav>
+  <h1>New Project</h1>
+  <p class="sub">Sherman + Associates</p>
+
+  <form id="form">
+
+    <label>Client Name <span class="req">*</span></label>
+    <input type="text" name="client_name" required>
+
+    <label>Property Address <span class="req">*</span></label>
+    <input type="text" name="property_address" required placeholder="15 North Water Street, Edgartown, MA">
+
+    <div class="two-col">
+      <div>
+        <label>Map</label>
+        <input type="text" name="map" placeholder="21A">
+      </div>
+      <div>
+        <label>Lot</label>
+        <input type="text" name="lot" placeholder="14">
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <label>Project Type <span class="req">*</span></label>
+        <select name="project_type" required>
+          <option value="">— select —</option>
+          <option value="Renovation">Renovation</option>
+          <option value="New Construction">New Construction</option>
+          <option value="Addition">Addition</option>
+          <option value="Renovation + Addition">Renovation + Addition</option>
+        </select>
+      </div>
+      <div>
+        <label>Billing Mode <span class="req">*</span></label>
+        <select name="billing_mode" required>
+          <option value="hourly">Hourly</option>
+          <option value="fixed_fee">Fixed Fee</option>
+        </select>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Scope of Services <span class="req">*</span></legend>
+      <div class="check-grid">
+        <label class="check-row"><input type="checkbox" name="scope" value="pre_design" checked> Pre-Design</label>
+        <label class="check-row"><input type="checkbox" name="scope" value="SD" checked> Schematic Design</label>
+        <label class="check-row"><input type="checkbox" name="scope" value="DD" checked> Design Development</label>
+        <label class="check-row"><input type="checkbox" name="scope" value="CD" checked> Construction Docs</label>
+        <label class="check-row"><input type="checkbox" name="scope" value="contract" checked> Contract</label>
+        <label class="check-row"><input type="checkbox" name="scope" value="CA" checked> Construction Admin</label>
+      </div>
+      <p class="hint">At least one phase required</p>
+    </fieldset>
+
+    <button type="submit">Create Project</button>
+  </form>
+
+  <div id="err" class="error" style="display:none"></div>
+
+  <script>
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('err').style.display = 'none';
+
+      const fd = new FormData(this);
+
+      const scopePhases = Array.from(
+        document.querySelectorAll('input[name="scope"]:checked')
+      ).map(el => el.value);
+
+      if (scopePhases.length === 0) {
+        showError('Select at least one scope phase.');
+        return;
+      }
+
+      const body = {
+        proposal_intake: {
+          client_name: fd.get('client_name').trim(),
+          property_address: fd.get('property_address').trim(),
+          map: fd.get('map').trim() || '',
+          lot: fd.get('lot').trim() || '',
+          project_type: fd.get('project_type'),
+          billing_mode: fd.get('billing_mode'),
+          scope_phases: scopePhases,
+        },
+        program_payload: {
+          spaces: [
+            { name: 'Living Room', level: 'First Floor', sf: 0, width_ft: 0, length_ft: 0, requirements: [], adjacencies: [] }
+          ]
+        },
+        field_report_payload: {
+          visit_date: 'TBD',
+          visit_time: 'TBD',
+          weather: 'TBD',
+          approximate_temp_f: 0,
+          phase: scopePhases[0],
+          work_in_progress: 'TBD',
+          parties_present: ['TBD'],
+          transmitted_to: ['TBD'],
+          observations: ['TBD'],
+          action_required: [],
+          old_items: [],
+          new_items: [],
+          site_photos: [],
+        },
+        schedule_payload: {
+          finish_entries: [{ space_name: 'Living Room', level: 'First Floor' }],
+          fixture_entries: [],
+        },
+      };
+
+      fetch('/projects/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      .then(r => r.json().then(d => ({ status: r.status, data: d })))
+      .then(({ status, data }) => {
+        if (status === 200) {
+          const projectId = data.project_id;
+          const propertyAddress = body.proposal_intake.property_address;
+          Promise.allSettled([
+            fetch('/clients', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                project_id: projectId,
+                client_name: body.proposal_intake.client_name,
+                home_address: propertyAddress,
+                home_email: 'placeholder@example.com',
+              }),
+            }),
+            fetch('/properties', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                project_id: projectId,
+                address: propertyAddress,
+                town: 'Edgartown',
+                map: body.proposal_intake.map,
+                lot: body.proposal_intake.lot,
+              }),
+            }),
+          ]).then(() => {
+            window.location = '/ui/projects/' + projectId;
+          });
+        } else {
+          showError(data.detail || JSON.stringify(data, null, 2));
+        }
+      })
+      .catch(() => showError('Could not reach server.'));
+    });
+
+    function showError(detail) {
+      const el = document.getElementById('err');
+      el.textContent = Array.isArray(detail)
+        ? detail.map(e => (e.loc ? e.loc.join('.') + ': ' : '') + e.msg).join('\n')
+        : (typeof detail === 'string' ? detail : JSON.stringify(detail, null, 2));
+      el.style.display = '';
+    }
+  </script>
+</body>
+</html>

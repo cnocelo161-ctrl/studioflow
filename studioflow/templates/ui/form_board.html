@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Reviewing Board — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    nav a { margin-right: 12px; }
+    label { display: block; font-size: 0.85rem; color: #444; margin-top: 14px; margin-bottom: 2px; }
+    select, input[type=date] {
+      width: 100%; box-sizing: border-box;
+      font-family: monospace; font-size: 0.9rem;
+      border: 1px solid #ccc; padding: 6px 8px;
+      background: #fff;
+    }
+    .check-row { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 0.85rem; color: #444; }
+    .check-row input { width: auto; }
+    .req { color: #900; }
+    button { margin-top: 22px; padding: 6px 18px; font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    .error { white-space: pre-wrap; color: #721c24; background: #f8d7da; padding: 10px 12px; margin-top: 16px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/ui/">← Dashboard</a>
+    <a href="/ui/projects/{{ project_id }}">← Project</a>
+  </nav>
+  <h1>Add Reviewing Board</h1>
+  <p class="sub">Project ID: {{ project_id }}</p>
+
+  <form id="form">
+    <input type="hidden" name="project_id" value="{{ project_id }}">
+
+    <label>Board Name <span class="req">*</span></label>
+    <select name="board_name" required>
+      <option value="">— select —</option>
+      <option value="ZBA">ZBA</option>
+      <option value="conservation_commission">Conservation Commission</option>
+      <option value="planning_board">Planning Board</option>
+      <option value="board_of_health">Board of Health</option>
+      <option value="site_review">Site Review</option>
+      <option value="historical_district">Historical District</option>
+      <option value="mv_commission">MV Commission</option>
+      <option value="building_dept">Building Dept</option>
+    </select>
+
+    <div class="check-row">
+      <input type="checkbox" id="req_check" name="required">
+      <label for="req_check" style="margin:0">Required for this project</label>
+    </div>
+
+    <label>Application Date</label>
+    <input type="date" name="application_date">
+
+    <label>Status <span class="req">*</span></label>
+    <select name="status" required>
+      <option value="not_required">Not Required</option>
+      <option value="pending">Pending</option>
+      <option value="granted">Granted</option>
+      <option value="denied">Denied</option>
+    </select>
+
+    <button type="submit">Save Board</button>
+  </form>
+
+  <div id="err" class="error" style="display:none"></div>
+
+  <script>
+    const projectId = {{ project_id | tojson }};
+
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('err').style.display = 'none';
+      const fd = new FormData(this);
+      const body = {
+        project_id: projectId,
+        board_name: fd.get('board_name'),
+        required: document.getElementById('req_check').checked,
+        status: fd.get('status'),
+      };
+      const appDate = fd.get('application_date');
+      if (appDate && appDate.trim() !== '') body.application_date = appDate.trim();
+
+      fetch('/boards', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      .then(r => r.json().then(d => ({ status: r.status, data: d })))
+      .then(({ status, data }) => {
+        if (status === 200) {
+          window.location = '/ui/projects/' + projectId;
+        } else {
+          showError(data.detail);
+        }
+      })
+      .catch(() => showError('Could not reach server.'));
+    });
+
+    function showError(detail) {
+      const el = document.getElementById('err');
+      el.textContent = Array.isArray(detail)
+        ? detail.map(e => (e.loc ? e.loc.join('.') + ': ' : '') + e.msg).join('\n')
+        : (typeof detail === 'string' ? detail : JSON.stringify(detail, null, 2));
+      el.style.display = '';
+    }
+  </script>
+</body>
+</html>

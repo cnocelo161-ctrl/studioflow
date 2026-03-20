@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudioFlow — Workflow Runner</title>
+  <style>
+    body { font-family: monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.2rem; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #555; }
+    textarea { width: 100%; height: 320px; font-family: monospace; font-size: 0.8rem;
+               border: 1px solid #ced4da; padding: 8px; box-sizing: border-box; }
+    button { margin-right: 8px; margin-top: 10px; padding: 8px 18px;
+             font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    button:disabled { opacity: 0.4; cursor: default; }
+    .error-box { color: #721c24; background: #f8d7da; padding: 10px; margin-top: 12px; white-space: pre-wrap; }
+    #output-section { margin-top: 24px; }
+    #output-section h2 { font-size: 1rem; }
+    pre { background: #f8f9fa; border: 1px solid #dee2e6; padding: 14px;
+          overflow: auto; max-height: 480px; font-size: 0.78rem; }
+    .confirm { color: #155724; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <nav><a href="/ui/">← Dashboard</a> &nbsp;|&nbsp; <a href="/ui/reviews">Review Queue</a></nav>
+  <h1>Workflow Runner</h1>
+
+  <label>Workflow payload (JSON):</label>
+  <textarea id="payload"></textarea>
+
+  <div>
+    <button id="run-btn" onclick="runWorkflow()">Run Workflow</button>
+    <button id="review-btn" onclick="submitReview()" disabled>Submit for Review</button>
+  </div>
+
+  <div id="error-box"></div>
+  <div id="confirm-box"></div>
+
+  <div id="output-section" style="display:none">
+    <h2>Output</h2>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    const DEMO_PAYLOAD = {
+      "proposal_intake": {
+        "client_name": "Demo Client",
+        "property_address": "1 Demo Lane, Edgartown, MA",
+        "map": "01",
+        "lot": "01",
+        "project_type": "New Construction",
+        "scope_phases": ["pre_design", "SD", "DD"],
+        "billing_mode": "hourly"
+      },
+      "program_payload": {
+        "spaces": [
+          {
+            "name": "Living Room",
+            "level": "First Floor",
+            "width_ft": 18.0,
+            "length_ft": 22.0,
+            "sf": 396.0,
+            "requirements": [],
+            "adjacencies": []
+          }
+        ]
+      },
+      "field_report_payload": {
+        "visit_date": "2026-03-19",
+        "visit_time": "10:00 AM",
+        "weather": "Clear",
+        "approximate_temp_f": 52.0,
+        "phase": "CA",
+        "work_in_progress": "Framing",
+        "parties_present": ["GC"],
+        "transmitted_to": ["Client"],
+        "observations": ["On track"],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "site_photos": []
+      },
+      "schedule_payload": {
+        "finish_entries": [
+          {
+            "space_name": "Living Room",
+            "level": "First Floor",
+            "flooring": "Oak",
+            "tile": null,
+            "paint_colors": "White"
+          }
+        ],
+        "fixture_entries": []
+      }
+    };
+
+    document.getElementById('payload').value = JSON.stringify(DEMO_PAYLOAD, null, 2);
+
+    let lastResult = null;
+
+    function setError(msg) {
+      document.getElementById('error-box').innerHTML =
+        msg ? `<div class="error-box">${msg}</div>` : '';
+    }
+
+    function setConfirm(msg) {
+      document.getElementById('confirm-box').innerHTML =
+        msg ? `<p class="confirm">${msg}</p>` : '';
+    }
+
+    function runWorkflow() {
+      setError('');
+      setConfirm('');
+      document.getElementById('review-btn').disabled = true;
+      document.getElementById('output-section').style.display = 'none';
+      lastResult = null;
+
+      let body;
+      try {
+        body = JSON.parse(document.getElementById('payload').value);
+      } catch (e) {
+        setError('Invalid JSON in payload.');
+        return;
+      }
+
+      fetch('/workflow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+        .then(r => r.json().then(d => ({ status: r.status, data: d })))
+        .then(({ status, data }) => {
+          if (status === 200) {
+            lastResult = data;
+            document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('output-section').style.display = 'block';
+            document.getElementById('review-btn').disabled = false;
+          } else {
+            setError(`Error ${status}: ${data.detail || JSON.stringify(data)}`);
+          }
+        })
+        .catch(() => setError('Could not reach backend.'));
+    }
+
+    function submitReview() {
+      if (!lastResult) return;
+      setError('');
+      setConfirm('');
+
+      fetch('/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'workflow', result: lastResult })
+      })
+        .then(r => r.json().then(d => ({ status: r.status, data: d })))
+        .then(({ status, data }) => {
+          if (status === 200) {
+            document.getElementById('review-btn').disabled = true;
+            setConfirm(`✓ Submitted for review. Review ID: ${data.review_id}`);
+          } else {
+            setError(`Error ${status}: ${data.detail || JSON.stringify(data)}`);
+          }
+        })
+        .catch(() => setError('Could not reach backend.'));
+    }
+  </script>
+</body>
+</html>

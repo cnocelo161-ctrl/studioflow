@@ -1,0 +1,1214 @@
+[
+  {
+    "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+    "client_name": "John & Sarah Mitchell",
+    "property_address": "15 North Water Street, Edgartown, MA",
+    "project_type": "Renovation + Addition",
+    "workflow_output": {
+      "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+      "proposal": {
+        "proposal_id": "f4d1117f-c0ca-4329-abfd-29c36fd498de",
+        "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+        "client": {
+          "name": "John & Sarah Mitchell",
+          "property_address": "15 North Water Street, Edgartown, MA",
+          "map": "21A",
+          "lot": "14"
+        },
+        "project_type": "Renovation + Addition",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-19T21:03:29.568399+00:00"
+      },
+      "program": {
+        "program_id": "1721b20f-b07d-4190-bd30-42c51da30796",
+        "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+        "net_sf": 480.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 528.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 20.0,
+              "length_ft": 24.0,
+              "sf": 480.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-19T21:03:29.568536+00:00"
+      },
+      "field_report": {
+        "report_id": "731e22da-2612-411e-8012-17d7d452ccb4",
+        "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+        "visit_date": "2026-03-18",
+        "visit_time": "10:00 AM",
+        "weather": "Clear",
+        "approximate_temp_f": 52.0,
+        "phase": "CA",
+        "work_in_progress": "Framing",
+        "parties_present": [
+          "GC"
+        ],
+        "transmitted_to": [
+          "Client"
+        ],
+        "observations": [
+          "On schedule"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-19T21:03:29.568573+00:00"
+      },
+      "schedule": {
+        "schedule_id": "9adaa5d4-6e8a-4999-81fa-106b0192cf70",
+        "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-19T21:03:29.568611+00:00"
+      },
+      "generated_at": "2026-03-19T21:03:29.568302+00:00"
+    },
+    "created_at": "2026-03-19T21:03:29.569293+00:00"
+  },
+  {
+    "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+    "client_name": "Robert & Lisa Nocelo",
+    "property_address": "42 Meetinghouse Road, Edgartown, MA",
+    "project_type": "New Construction",
+    "workflow_output": {
+      "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+      "proposal": {
+        "proposal_id": "598dceb5-a788-40b4-b4c8-c39f345c8b13",
+        "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+        "client": {
+          "name": "Robert & Lisa Nocelo",
+          "property_address": "42 Meetinghouse Road, Edgartown, MA",
+          "map": "",
+          "lot": ""
+        },
+        "project_type": "New Construction",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:10:29.538293+00:00"
+      },
+      "program": {
+        "program_id": "381b38ef-ea2b-47d4-a53e-a31ff3783fa5",
+        "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+        "net_sf": 0.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 0.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 0.0,
+              "length_ft": 0.0,
+              "sf": 0.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:10:29.538459+00:00"
+      },
+      "field_report": {
+        "report_id": "608c6074-b9da-4323-a23c-dc8a05916947",
+        "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+        "visit_date": "TBD",
+        "visit_time": "TBD",
+        "weather": "TBD",
+        "approximate_temp_f": 0.0,
+        "phase": "pre_design",
+        "work_in_progress": "TBD",
+        "parties_present": [
+          "TBD"
+        ],
+        "transmitted_to": [
+          "TBD"
+        ],
+        "observations": [
+          "TBD"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:10:29.538553+00:00"
+      },
+      "schedule": {
+        "schedule_id": "245f097d-bbc3-435b-9cb9-2c41f962874c",
+        "project_id": "9ce5f52a-9993-4ab3-8eb3-18fbb32579c2",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:10:29.538650+00:00"
+      },
+      "generated_at": "2026-03-20T10:10:29.538159+00:00"
+    },
+    "created_at": "2026-03-20T10:10:29.539148+00:00"
+  },
+  {
+    "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+    "client_name": "Robert & Lisa Nocelo",
+    "property_address": "42 Meetinghouse Road, Edgartown, MA",
+    "project_type": "New Construction",
+    "workflow_output": {
+      "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+      "proposal": {
+        "proposal_id": "a94c94cb-bf97-4a0c-9eca-c19c4457a3ad",
+        "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+        "client": {
+          "name": "Robert & Lisa Nocelo",
+          "property_address": "42 Meetinghouse Road, Edgartown, MA",
+          "map": "",
+          "lot": ""
+        },
+        "project_type": "New Construction",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:22.003939+00:00"
+      },
+      "program": {
+        "program_id": "90d1dd5f-1398-4eae-93f8-29ef48266493",
+        "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+        "net_sf": 0.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 0.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 0.0,
+              "length_ft": 0.0,
+              "sf": 0.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:22.004079+00:00"
+      },
+      "field_report": {
+        "report_id": "48ee500d-8ff7-45bb-8fda-eeb56cfa7f5d",
+        "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+        "visit_date": "TBD",
+        "visit_time": "TBD",
+        "weather": "TBD",
+        "approximate_temp_f": 0.0,
+        "phase": "pre_design",
+        "work_in_progress": "TBD",
+        "parties_present": [
+          "TBD"
+        ],
+        "transmitted_to": [
+          "TBD"
+        ],
+        "observations": [
+          "TBD"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:22.004166+00:00"
+      },
+      "schedule": {
+        "schedule_id": "ed669551-6010-4252-a2a6-3ca1f7c469e0",
+        "project_id": "eb622f08-3515-4c5b-b14b-0114c508bb63",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:22.004241+00:00"
+      },
+      "generated_at": "2026-03-20T10:14:22.003807+00:00"
+    },
+    "created_at": "2026-03-20T10:14:22.004694+00:00"
+  },
+  {
+    "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+    "client_name": "Andrew & Claire Whitman",
+    "property_address": "7 North Summer Street, Edgartown, MA",
+    "project_type": "Renovation + Addition",
+    "workflow_output": {
+      "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+      "proposal": {
+        "proposal_id": "165b5fb1-633b-43a1-9738-6355426b98d6",
+        "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+        "client": {
+          "name": "Andrew & Claire Whitman",
+          "property_address": "7 North Summer Street, Edgartown, MA",
+          "map": "",
+          "lot": ""
+        },
+        "project_type": "Renovation + Addition",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:59.155673+00:00"
+      },
+      "program": {
+        "program_id": "eaf7a868-d53e-42d0-8a5b-5a3440741384",
+        "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+        "net_sf": 0.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 0.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 0.0,
+              "length_ft": 0.0,
+              "sf": 0.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:59.155887+00:00"
+      },
+      "field_report": {
+        "report_id": "b54295de-b242-4164-85fb-a4979f07c5a2",
+        "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+        "visit_date": "TBD",
+        "visit_time": "TBD",
+        "weather": "TBD",
+        "approximate_temp_f": 0.0,
+        "phase": "pre_design",
+        "work_in_progress": "TBD",
+        "parties_present": [
+          "TBD"
+        ],
+        "transmitted_to": [
+          "TBD"
+        ],
+        "observations": [
+          "TBD"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:59.156037+00:00"
+      },
+      "schedule": {
+        "schedule_id": "1b2444d1-4736-4471-81d2-93b1770c003d",
+        "project_id": "4111bd68-71a4-43fe-9629-7a4186ffcde3",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:14:59.156159+00:00"
+      },
+      "generated_at": "2026-03-20T10:14:59.155525+00:00"
+    },
+    "created_at": "2026-03-20T10:14:59.156864+00:00"
+  },
+  {
+    "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+    "client_name": "Andrew & Claire Whitman",
+    "property_address": "7 North Summer Street, Edgartown, MA",
+    "project_type": "Renovation + Addition",
+    "workflow_output": {
+      "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+      "proposal": {
+        "proposal_id": "cda790cc-2436-4c33-9001-ccb829792cb7",
+        "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+        "client": {
+          "name": "Andrew & Claire Whitman",
+          "property_address": "7 North Summer Street, Edgartown, MA",
+          "map": "",
+          "lot": ""
+        },
+        "project_type": "Renovation + Addition",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:19:41.711967+00:00"
+      },
+      "program": {
+        "program_id": "a28d9395-470d-4cd7-a9b3-701a1516276f",
+        "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+        "net_sf": 0.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 0.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 0.0,
+              "length_ft": 0.0,
+              "sf": 0.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:19:41.712250+00:00"
+      },
+      "field_report": {
+        "report_id": "e74ecca1-950d-4b67-a388-3ab7c220306b",
+        "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+        "visit_date": "TBD",
+        "visit_time": "TBD",
+        "weather": "TBD",
+        "approximate_temp_f": 0.0,
+        "phase": "pre_design",
+        "work_in_progress": "TBD",
+        "parties_present": [
+          "TBD"
+        ],
+        "transmitted_to": [
+          "TBD"
+        ],
+        "observations": [
+          "TBD"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:19:41.712382+00:00"
+      },
+      "schedule": {
+        "schedule_id": "1611bbe7-7029-42f7-98e5-161f3be4a9bf",
+        "project_id": "dc4eba3d-52ba-482b-8df9-281568f81cc6",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:19:41.712639+00:00"
+      },
+      "generated_at": "2026-03-20T10:19:41.711835+00:00"
+    },
+    "created_at": "2026-03-20T10:19:41.713343+00:00"
+  },
+  {
+    "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+    "client_name": "Andrew & Claire Whitman",
+    "property_address": "7 North Summer Street, Edgartown, MA",
+    "project_type": "Renovation + Addition",
+    "workflow_output": {
+      "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+      "proposal": {
+        "proposal_id": "f4963c7b-df92-429a-a72d-e142febfb010",
+        "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+        "client": {
+          "name": "Andrew & Claire Whitman",
+          "property_address": "7 North Summer Street, Edgartown, MA",
+          "map": "",
+          "lot": ""
+        },
+        "project_type": "Renovation + Addition",
+        "scope_of_services": [
+          {
+            "phase_code": "1.1",
+            "phase_token": "pre_design",
+            "name": "Pre-Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Inventory and analyze existing structures, amenities, and site features",
+              "Create existing conditions drawings as required",
+              "Prepare Zoning Analysis outlining all applicable Federal, State, and Local zoning and conservation restrictions, and building limitations",
+              "Issue RFP for primary consultants: geotechnical, civil, as required",
+              "Develop Preliminary Program of Spaces",
+              "Review environmental goals",
+              "Discuss primary consultants: Landscape Architect, Interior Designer",
+              "Finalize Program of Spaces, review Budget, and Schedule"
+            ]
+          },
+          {
+            "phase_code": "1.2",
+            "phase_token": "SD",
+            "name": "Schematic Design",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Schematic Design drawings, sketches, plans, elevations, sections, and models as required",
+              "Issue RFP for Structural Engineer",
+              "Acquire DWG and site information from Civil Engineers; develop Preliminary Site Plan",
+              "Finalize primary consultants: Engineering, Landscape, Interiors",
+              "Discuss secondary consultants: MEP, Solar, Lighting, AV",
+              "Present SD set to client; may include models, images, textures",
+              "Revise Schematic Design as necessary",
+              "Work with contractor to develop Opinion of Probable Cost of Construction"
+            ]
+          },
+          {
+            "phase_code": "1.3",
+            "phase_token": "DD",
+            "name": "Design Development",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare Outline Specification Manual listing finishes, preferred mechanical systems, construction methods and materials",
+              "Create more detailed drawings including specific windows and doors, refinements to the exterior appearance, and development of Floor Plans and Elevations",
+              "Review Design Development documents with client and revise as needed",
+              "Coordinate and file for any necessary permitting (ZBA, ConComm); attend all required hearings",
+              "Obtain Opinion of Probable Cost of Construction from a licensed contractor",
+              "Perform Value Engineering as required: review Floor Plans, fixtures, and finishes to align Budget and Probable Cost"
+            ]
+          },
+          {
+            "phase_code": "1.4",
+            "phase_token": "CD",
+            "name": "Construction Documents",
+            "billing_type": "hourly",
+            "tasks": [
+              "Prepare comprehensive drawing set: Foundation Plan, Floor Plans, Building Sections, Assembly Details, Exterior Elevations, Interior Elevations, Door and Window Schedules",
+              "Milestone reviews at 25%, 50%, 75%, and 90% completion with client",
+              "Develop structural drawings with engineer through all CD milestones",
+              "Develop grading plans with Landscape Architect",
+              "Prepare Specification Manual including General Contractor responsibilities throughout the project and beyond, with a one-year warranty",
+              "Finalize all Fixture and Finish Schedules: electrical and plumbing fixtures, tile, flooring, cabinets, hardware, appliances, paint colors"
+            ]
+          },
+          {
+            "phase_code": "1.5",
+            "phase_token": "contract",
+            "name": "Contract and Negotiation",
+            "billing_type": "hourly",
+            "tasks": [
+              "Issue Construction Documents to bidders",
+              "Review bids and create Bid Analysis",
+              "Perform further cost engineering as required",
+              "Finalize and award contract"
+            ]
+          },
+          {
+            "phase_code": "1.6",
+            "phase_token": "CA",
+            "name": "Construction Administration",
+            "billing_type": "hourly",
+            "tasks": [
+              "Conduct periodic site visits to observe construction progress and answer questions from the contractor",
+              "Take photos of construction progress and forward to client",
+              "Review Applications for Payment based on progress and forward to client for payment",
+              "Review and negotiate Requests for Change Orders prior to client approval",
+              "Prepare and administer Punch List",
+              "Review final reconciliation of contract and complete Project Closeout following final walk through with client and contractor"
+            ]
+          }
+        ],
+        "compensation": {
+          "billing_mode": "hourly",
+          "hourly_phases": [
+            "pre_design",
+            "SD",
+            "DD",
+            "CD",
+            "contract",
+            "CA"
+          ],
+          "fixed_fee_phases": [],
+          "hourly_rates": {
+            "founding_principal": 225.0,
+            "design_principal": 225.0,
+            "senior_associate": 185.0,
+            "associate": 165.0,
+            "project_administration": 125.0
+          },
+          "fixed_fee_percent": null,
+          "probable_cost": null,
+          "fixed_fee_total": null
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:31:00.353424+00:00"
+      },
+      "program": {
+        "program_id": "87cbd4ff-9f15-4589-a752-835945ce26cd",
+        "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+        "net_sf": 0.0,
+        "circulation_factor": 0.1,
+        "gross_sf": 0.0,
+        "spaces_by_level": {
+          "First Floor": [
+            {
+              "name": "Living Room",
+              "level": "First Floor",
+              "width_ft": 0.0,
+              "length_ft": 0.0,
+              "sf": 0.0,
+              "requirements": [],
+              "adjacencies": []
+            }
+          ]
+        },
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:31:00.353493+00:00"
+      },
+      "field_report": {
+        "report_id": "068d6115-4990-4583-9985-9fae3204cc5d",
+        "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+        "visit_date": "TBD",
+        "visit_time": "TBD",
+        "weather": "TBD",
+        "approximate_temp_f": 0.0,
+        "phase": "pre_design",
+        "work_in_progress": "TBD",
+        "parties_present": [
+          "TBD"
+        ],
+        "transmitted_to": [
+          "TBD"
+        ],
+        "observations": [
+          "TBD"
+        ],
+        "action_required": [],
+        "old_items": [],
+        "new_items": [],
+        "open_item_count": 0,
+        "site_photos": [],
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:31:00.353528+00:00"
+      },
+      "schedule": {
+        "schedule_id": "0beaf33a-12ac-4eae-96be-3a14c391ca89",
+        "project_id": "12f5c6ea-3f89-44a8-8459-d6462aa0a825",
+        "finish_by_level": {
+          "First Floor": [
+            {
+              "space_name": "Living Room",
+              "level": "First Floor",
+              "flooring": null,
+              "tile": null,
+              "paint_colors": null,
+              "notes": null
+            }
+          ]
+        },
+        "fixtures_by_type": {},
+        "total_fixture_count": 0,
+        "document_ready": true,
+        "generated_at": "2026-03-20T10:31:00.353562+00:00"
+      },
+      "generated_at": "2026-03-20T10:31:00.353367+00:00"
+    },
+    "created_at": "2026-03-20T10:31:00.353739+00:00"
+  }
+]

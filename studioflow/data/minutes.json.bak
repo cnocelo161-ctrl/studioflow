@@ -1,0 +1,59 @@
+[
+  {
+    "minute_id": "a4a11937-53b4-4e9a-86aa-6b5fe2c36dc3",
+    "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+    "meeting_date": "2026-03-29",
+    "meeting_type": "OAC",
+    "location": null,
+    "attendees": [
+      "Architect",
+      "Client",
+      "Contractor"
+    ],
+    "agenda_items": [
+      "Review framing progress",
+      "Discuss window revisions"
+    ],
+    "action_items": [],
+    "next_meeting_date": null,
+    "created_at": "2026-03-19T21:27:58.971967+00:00"
+  },
+  {
+    "minute_id": "78d62712-c030-485b-b476-81ec57330072",
+    "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+    "meeting_date": "2026-03-29",
+    "meeting_type": "OAC",
+    "location": null,
+    "attendees": [
+      "Architect",
+      "Client",
+      "Contractor"
+    ],
+    "agenda_items": [
+      "Review framing progress",
+      "Discuss window revisions"
+    ],
+    "action_items": [],
+    "next_meeting_date": null,
+    "created_at": "2026-03-19T21:32:29.847603+00:00"
+  },
+  {
+    "minute_id": "6868581b-380c-42fe-ac35-2affe4efa9a8",
+    "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+    "meeting_date": "2026-03-29",
+    "meeting_type": "OAC",
+    "location": null,
+    "attendees": [
+      "Architect",
+      "Client",
+      "Contractor"
+    ],
+    "agenda_items": [
+      "Review framing progress",
+      "Discuss window revisions"
+    ],
+    "action_items": [],
+    "next_meeting_date": null,
+    "created_at": "2026-03-19T21:32:47.593634+00:00"
+  }
+]

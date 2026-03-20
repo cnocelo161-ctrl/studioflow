@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Directive — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    nav a { margin-right: 12px; }
+    label { display: block; font-size: 0.85rem; color: #444; margin-top: 14px; margin-bottom: 2px; }
+    input[type=text], input[type=date], input[type=number], textarea {
+      width: 100%; box-sizing: border-box;
+      font-family: monospace; font-size: 0.9rem;
+      border: 1px solid #ccc; padding: 6px 8px;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    .hint { font-size: 0.78rem; color: #888; margin-top: 3px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .req { color: #900; }
+    button { margin-top: 22px; padding: 6px 18px; font-family: monospace; font-size: 0.9rem; cursor: pointer; }
+    .error { white-space: pre-wrap; color: #721c24; background: #f8d7da; padding: 10px 12px; margin-top: 16px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/ui/">← Dashboard</a>
+    <a href="/ui/projects/{{ project_id }}">← Project</a>
+  </nav>
+  <h1>Add Directive</h1>
+  <p class="sub">Project ID: {{ project_id }}</p>
+
+  <form id="form">
+    <input type="hidden" name="project_id" value="{{ project_id }}">
+
+    <div class="two-col">
+      <div>
+        <label>Directive Number <span class="req">*</span></label>
+        <input type="number" name="directive_number" min="1" step="1" required>
+      </div>
+      <div>
+        <label>Date <span class="req">*</span></label>
+        <input type="date" name="date" required>
+      </div>
+    </div>
+
+    <label>Description <span class="req">*</span></label>
+    <textarea name="description" required></textarea>
+
+    <label>Trade</label>
+    <input type="text" name="trade">
+
+    <label>Drawing References</label>
+    <input type="text" name="drawing_references" placeholder="A-201, S-101">
+    <p class="hint">Optional — comma-separated</p>
+
+    <label>Estimated Cost Impact ($)</label>
+    <input type="number" name="estimated_cost_impact" step="any" min="0">
+
+    <button type="submit">Save Directive</button>
+  </form>
+
+  <div id="err" class="error" style="display:none"></div>
+
+  <script>
+    const projectId = {{ project_id | tojson }};
+
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('err').style.display = 'none';
+      const fd = new FormData(this);
+      const body = {
+        project_id: projectId,
+        directive_number: parseInt(fd.get('directive_number'), 10),
+        date: fd.get('date'),
+        description: fd.get('description').trim(),
+      };
+      const trade = fd.get('trade').trim();
+      if (trade !== '') body.trade = trade;
+
+      const refs = fd.get('drawing_references').trim();
+      body.drawing_references = refs !== ''
+        ? refs.split(',').map(s => s.trim()).filter(s => s !== '')
+        : [];
+
+      const cost = fd.get('estimated_cost_impact').trim();
+      if (cost !== '') body.estimated_cost_impact = parseFloat(cost);
+
+      fetch('/directives', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      .then(r => r.json().then(d => ({ status: r.status, data: d })))
+      .then(({ status, data }) => {
+        if (status === 200) {
+          window.location = '/ui/projects/' + projectId;
+        } else {
+          showError(data.detail);
+        }
+      })
+      .catch(() => showError('Could not reach server.'));
+    });
+
+    function showError(detail) {
+      const el = document.getElementById('err');
+      el.textContent = Array.isArray(detail)
+        ? detail.map(e => (e.loc ? e.loc.join('.') + ': ' : '') + e.msg).join('\n')
+        : (typeof detail === 'string' ? detail : JSON.stringify(detail, null, 2));
+      el.style.display = '';
+    }
+  </script>
+</body>
+</html>

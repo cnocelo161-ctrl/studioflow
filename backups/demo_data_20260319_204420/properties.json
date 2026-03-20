@@ -1,0 +1,19 @@
+[
+  {
+    "property_id": "049d9f74-563c-45fc-a124-8ed6d8e558ad",
+    "project_id": "fd092e42-1394-44a3-be80-d4fd5d1e4e2b",
+    "address": "15 North Water Street",
+    "town": "Edgartown",
+    "map": "21A",
+    "lot": "14",
+    "zoning_district": "R-20",
+    "setback_front_ft": null,
+    "setback_side_ft": null,
+    "setback_rear_ft": null,
+    "bedroom_count": null,
+    "sf_existing_total": 1850.0,
+    "sf_new_total": null,
+    "total_project_cost": 950000.0,
+    "created_at": "2026-03-19T21:19:00.308278+00:00"
+  }
+]

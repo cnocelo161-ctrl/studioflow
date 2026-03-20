@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 800px; margin: 60px auto; padding: 0 20px; }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .sub { color: #666; margin-bottom: 32px; font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 4px 14px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; }
+    .ok    { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+    .checking { background: #e2e3e5; color: #383d41; }
+    nav { margin-top: 32px; }
+    nav a { margin-right: 24px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>StudioFlow</h1>
+  <p class="sub">Sherman + Associates — Internal Demo</p>
+
+  <p>Backend: <span id="badge" class="badge checking">checking…</span></p>
+
+  <nav>
+    <a href="/ui/projects">▶ Projects</a>
+    <a href="/ui/projects/new">+ New Project</a>
+    <a href="/ui/reviews">☰ Review Queue</a>
+  </nav>
+
+  <script>
+    fetch('/health')
+      .then(r => r.json())
+      .then(d => {
+        const b = document.getElementById('badge');
+        b.textContent = d.status === 'ok' ? 'OK' : 'ERROR';
+        b.className = 'badge ' + (d.status === 'ok' ? 'ok' : 'error');
+      })
+      .catch(() => {
+        const b = document.getElementById('badge');
+        b.textContent = 'Could not reach backend';
+        b.className = 'badge error';
+      });
+  </script>
+</body>
+</html>

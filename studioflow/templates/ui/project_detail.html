@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project — StudioFlow</title>
+  <style>
+    body { font-family: monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 1.2rem; margin-bottom: 4px; }
+    h2 { font-size: 1rem; margin-top: 32px; margin-bottom: 8px; }
+    .sub { color: #666; font-size: 0.85rem; margin-bottom: 10px; }
+    nav { margin-bottom: 20px; font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #ddd; }
+    th { background: #f5f5f5; }
+    .meta-grid { display: grid; grid-template-columns: 160px 1fr; gap: 6px 16px; margin-bottom: 8px; font-size: 0.9rem; }
+    .meta-label { color: #555; }
+    details { margin-top: 8px; }
+    summary { cursor: pointer; font-size: 0.9rem; color: #333; padding: 4px 0; }
+    pre { background: #f8f9fa; border: 1px solid #dee2e6; padding: 14px;
+          overflow: auto; max-height: 400px; font-size: 0.75rem; margin-top: 8px; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+    .pending  { background: #fff3cd; color: #856404; }
+    .approved { background: #d4edda; color: #155724; }
+    .rejected { background: #f8d7da; color: #721c24; }
+    .btn { padding: 4px 12px; font-family: monospace; font-size: 0.85rem; cursor: pointer; margin-right: 6px; }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+    .error { color: #721c24; background: #f8d7da; padding: 10px; margin-top: 12px; }
+    .confirm { color: #155724; margin-top: 8px; }
+    .empty { color: #999; }
+    #loading { color: #999; }
+    /* Core state — status badges */
+    .status-badge { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
+    .s-active    { background: #e2e3e5; color: #383d41; }
+    .s-pending   { background: #fff3cd; color: #856404; }
+    .s-reviewed  { background: #d4edda; color: #155724; }
+    /* Core state — status strip */
+    #status-strip { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+    #next-action-el { font-size: 0.9rem; color: #444; }
+    #last-activity-el { font-size: 0.8rem; color: #666; margin-bottom: 20px; }
+    /* Core state — action required banner */
+    .action-banner { border-left: 4px solid #f0ad4e; background: #fffbf0; padding: 10px 14px; margin-bottom: 20px; font-size: 0.9rem; }
+    /* Review count label in h2 */
+    #review-count-label { font-weight: normal; font-size: 0.9rem; }
+    /* Mission Control sections */
+    .mc-section { margin-top: 32px; }
+    .mc-section h2 { border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; }
+    .mc-grid { display: grid; grid-template-columns: 160px 1fr; gap: 6px 16px; font-size: 0.9rem; margin-top: 8px; }
+    .mc-label { color: #555; }
+    .mc-empty { color: #999; font-size: 0.9rem; margin-top: 6px; }
+    /* Add links in section headers */
+    .add-link { font-size: 0.8rem; font-weight: normal; margin-left: 10px; color: #555; text-decoration: none; }
+    .add-link:hover { color: #000; text-decoration: underline; }
+    /* Board status badges */
+    .board-pending { background: #fff3cd; color: #856404; }
+    .board-granted { background: #d4edda; color: #155724; }
+    .board-denied  { background: #f8d7da; color: #721c24; }
+    .board-not_required { background: #e2e3e5; color: #383d41; }
+  </style>
+</head>
+<body>
+  <nav><a href="/ui/">← Dashboard</a> &nbsp;|&nbsp; <a href="/ui/projects">Projects</a></nav>
+
+  <div id="loading">Loading project…</div>
+  <div id="content" style="display:none">
+    <h1 id="title"></h1>
+    <p class="sub" id="subtitle"></p>
+
+    <div id="status-strip">
+      <span id="status-badge-el"></span>
+      <span id="next-action-el"></span>
+    </div>
+    <p id="last-activity-el"></p>
+
+    <h2>Details</h2>
+    <div class="meta-grid" id="meta"></div>
+
+    <details>
+      <summary>Workflow Output (JSON)</summary>
+      <pre id="workflow-output"></pre>
+    </details>
+
+    <div id="action-banner" class="action-banner" style="display:none">
+      <strong>Action Required</strong> — <span id="action-text-el"></span>
+    </div>
+
+    <!-- ── CLIENT ─────────────────────────────────────────────────────────── -->
+    <div class="mc-section">
+      <h2>Client <a class="add-link" id="client-add-link" href="#">+ Add</a></h2>
+      <div id="client-content"><span class="mc-empty">Loading…</span></div>
+    </div>
+
+    <!-- ── PROPERTY ───────────────────────────────────────────────────────── -->
+    <div class="mc-section">
+      <h2>Property <a class="add-link" id="property-add-link" href="#">+ Add</a></h2>
+      <div id="property-content"><span class="mc-empty">Loading…</span></div>
+    </div>
+
+    <!-- ── REVIEWING BOARDS ───────────────────────────────────────────────── -->
+    <div class="mc-section">
+      <h2>Reviewing Boards <a class="add-link" href="/ui/projects/{{ project_id }}/new/board">+ Add</a></h2>
+      <div id="boards-content"><span class="mc-empty">Loading…</span></div>
+    </div>
+
+    <!-- ── DIRECTIVES ─────────────────────────────────────────────────────── -->
+    <div class="mc-section">
+      <h2>Directives <a class="add-link" href="/ui/projects/{{ project_id }}/new/directive">+ Add</a></h2>
+      <div id="directives-content"><span class="mc-empty">Loading…</span></div>
+    </div>
+
+    <!-- ── MEETINGS ───────────────────────────────────────────────────────── -->
+    <div class="mc-section">
+      <h2>Meetings <a class="add-link" href="/ui/projects/{{ project_id }}/new/minute">+ Add</a></h2>
+      <div id="minutes-content"><span class="mc-empty">Loading…</span></div>
+    </div>
+
+    <h2>Reviews <span id="review-count-label"></span></h2>
+    <div id="review-error"></div>
+    <div id="review-confirm"></div>
+    <table id="review-table" style="display:none">
+      <thead>
+        <tr><th>Review ID</th><th>Action</th><th>State</th><th>Submitted</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="review-tbody"></tbody>
+    </table>
+    <p id="review-empty" class="empty" style="display:none">No reviews yet.</p>
+  </div>
+  <div id="page-error" class="error" style="display:none"></div>
+
+  <script>
+    const projectId = {{ project_id | tojson }};
+
+    function renderReviews(reviews) {
+      document.getElementById('review-error').innerHTML = '';
+      document.getElementById('review-confirm').innerHTML = '';
+      const tbody = document.getElementById('review-tbody');
+      tbody.innerHTML = '';
+      if (reviews.length === 0) {
+        document.getElementById('review-table').style.display = 'none';
+        document.getElementById('review-empty').style.display = '';
+      } else {
+        document.getElementById('review-empty').style.display = 'none';
+        document.getElementById('review-table').style.display = '';
+        reviews.forEach(r => {
+          const tr = document.createElement('tr');
+          const canDecide = r.state === 'pending';
+          tr.innerHTML = `
+            <td style="font-size:0.75rem">${r.review_id}</td>
+            <td>${r.action}</td>
+            <td><span class="badge ${r.state}">${r.state}</span></td>
+            <td>${r.submitted_at.replace('T', ' ').substring(0, 19)} UTC</td>
+            <td>
+              <button class="btn" onclick="approve('${r.review_id}')" ${canDecide ? '' : 'disabled'}>Approve</button>
+              <button class="btn" onclick="reject('${r.review_id}')"  ${canDecide ? '' : 'disabled'}>Reject</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function renderCoreState(core) {
+      const statusMap = {
+        'active':         ['s-active',   'Active'],
+        'pending_review': ['s-pending',  'Review Required'],
+        'reviewed':       ['s-reviewed', 'Reviewed'],
+      };
+      const [cls, label] = statusMap[core.status] || ['s-active', core.status];
+      document.getElementById('status-badge-el').innerHTML =
+        `<span class="status-badge ${cls}">${label}</span>`;
+      document.getElementById('next-action-el').textContent = core.next_action;
+      document.getElementById('last-activity-el').textContent =
+        'Last activity: ' + core.last_activity_at.replace('T', ' ').substring(0, 19) + ' UTC';
+
+      const banner = document.getElementById('action-banner');
+      if (core.review_required) {
+        document.getElementById('action-text-el').textContent = core.next_action;
+        banner.style.display = '';
+      } else {
+        banner.style.display = 'none';
+      }
+
+      const countLabel = document.getElementById('review-count-label');
+      if (core.pending_review_count > 0) {
+        countLabel.textContent = '(' + core.pending_review_count + ' pending)';
+        countLabel.style.color = '#856404';
+      } else if (core.review_count > 0) {
+        countLabel.textContent = '(' + core.review_count + ' total)';
+        countLabel.style.color = '#555';
+      } else {
+        countLabel.textContent = '';
+      }
+    }
+
+    function val(v) {
+      return (v !== null && v !== undefined && v !== '') ? v : '—';
+    }
+
+    function renderClient(clients) {
+      const el = document.getElementById('client-content');
+      const c = clients.find(x => x.project_id === projectId);
+      if (!c) { el.innerHTML = '<span class="mc-empty">No client record.</span>'; return; }
+      el.innerHTML = `
+        <div class="mc-grid">
+          <span class="mc-label">Name</span><span>${val(c.client_name)}</span>
+          <span class="mc-label">Home Address</span><span>${val(c.home_address)}</span>
+          <span class="mc-label">Home Email</span><span>${val(c.home_email)}</span>
+        </div>`;
+    }
+
+    function renderProperty(properties) {
+      const el = document.getElementById('property-content');
+      const p = properties.find(x => x.project_id === projectId);
+      if (!p) { el.innerHTML = '<span class="mc-empty">No property record.</span>'; return; }
+      el.innerHTML = `
+        <div class="mc-grid">
+          <span class="mc-label">Address</span><span>${val(p.address)}</span>
+          <span class="mc-label">Town</span><span>${val(p.town)}</span>
+          <span class="mc-label">Zoning District</span><span>${val(p.zoning_district)}</span>
+          <span class="mc-label">Existing SF</span><span>${p.sf_existing_total !== null && p.sf_existing_total !== undefined ? p.sf_existing_total.toLocaleString() + ' sf' : '—'}</span>
+          <span class="mc-label">Total Project Cost</span><span>${p.total_project_cost !== null && p.total_project_cost !== undefined ? '$' + p.total_project_cost.toLocaleString() : '—'}</span>
+        </div>`;
+    }
+
+    function renderBoards(boards) {
+      const el = document.getElementById('boards-content');
+      const filtered = boards.filter(x => x.project_id === projectId);
+      if (filtered.length === 0) { el.innerHTML = '<span class="mc-empty">No board records.</span>'; return; }
+      const rows = filtered.map(b => {
+        const cls = 'board-' + b.status;
+        return `<tr>
+          <td>${b.board_name.replace(/_/g, ' ')}</td>
+          <td>${b.required ? 'Yes' : 'No'}</td>
+          <td>${val(b.application_date)}</td>
+          <td><span class="badge ${cls}">${b.status.replace(/_/g, ' ')}</span></td>
+        </tr>`;
+      }).join('');
+      el.innerHTML = `<table><thead><tr><th>Board</th><th>Required</th><th>Application Date</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function renderDirectives(directives) {
+      const el = document.getElementById('directives-content');
+      const filtered = directives.filter(x => x.project_id === projectId);
+      if (filtered.length === 0) { el.innerHTML = '<span class="mc-empty">No directives.</span>'; return; }
+      const rows = filtered.map(d => {
+        const cost = d.estimated_cost_impact !== null && d.estimated_cost_impact !== undefined
+          ? '$' + d.estimated_cost_impact.toLocaleString()
+          : '—';
+        return `<tr>
+          <td>${d.directive_number}</td>
+          <td>${val(d.description)}</td>
+          <td>${val(d.trade)}</td>
+          <td>${cost}</td>
+        </tr>`;
+      }).join('');
+      el.innerHTML = `<table><thead><tr><th>#</th><th>Description</th><th>Trade</th><th>Cost Impact</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function renderMinutes(minutes) {
+      const el = document.getElementById('minutes-content');
+      const filtered = minutes.filter(x => x.project_id === projectId);
+      if (filtered.length === 0) { el.innerHTML = '<span class="mc-empty">No meeting minutes.</span>'; return; }
+      const rows = filtered.map(m => {
+        return `<tr>
+          <td>${m.meeting_type}</td>
+          <td>${m.meeting_date}</td>
+          <td>${m.action_items ? m.action_items.length : 0}</td>
+        </tr>`;
+      }).join('');
+      el.innerHTML = `<table><thead><tr><th>Type</th><th>Date</th><th>Action Items</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function loadMissionControl() {
+      const endpoints = [
+        fetch('/clients').then(r => r.json()),
+        fetch('/properties').then(r => r.json()),
+        fetch('/boards').then(r => r.json()),
+        fetch('/directives').then(r => r.json()),
+        fetch('/minutes').then(r => r.json()),
+      ];
+
+      Promise.all(endpoints).then(([c, p, b, d, m]) => {
+        renderClient(c.clients || []);
+        renderProperty(p.properties || []);
+        renderBoards(b.boards || []);
+        renderDirectives(d.directives || []);
+        renderMinutes(m.minutes || []);
+      }).catch(() => {
+        ['client', 'property', 'boards', 'directives', 'minutes'].forEach(id => {
+          const el = document.getElementById(id + '-content');
+          if (el) el.innerHTML = '<span class="mc-empty">Failed to load.</span>';
+        });
+      });
+    }
+
+    function load() {
+      fetch('/projects/' + projectId)
+        .then(r => r.json().then(d => ({ status: r.status, data: d })))
+        .then(({ status, data }) => {
+          if (status !== 200) {
+            document.getElementById('loading').style.display = 'none';
+            const el = document.getElementById('page-error');
+            el.textContent = `Error ${status}: ${data.detail || JSON.stringify(data)}`;
+            el.style.display = '';
+            return;
+          }
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('content').style.display = '';
+
+          document.getElementById('title').textContent = data.client_name;
+          document.getElementById('subtitle').textContent = data.property_address;
+          document.getElementById('meta').innerHTML = `
+            <span class="meta-label">Project ID</span><span>${data.project_id}</span>
+            <span class="meta-label">Project Type</span><span>${data.project_type}</span>
+            <span class="meta-label">Created</span><span>${data.created_at.replace('T', ' ').substring(0, 19)} UTC</span>
+            <span class="meta-label">Last Activity</span><span>${data.core.last_activity_at.replace('T', ' ').substring(0, 19)} UTC</span>
+          `;
+          document.getElementById('workflow-output').textContent =
+            JSON.stringify(data.workflow_output, null, 2);
+          renderCoreState(data.core);
+          renderReviews(data.reviews);
+          loadMissionControl();
+        })
+        .catch(e => {
+          document.getElementById('loading').style.display = 'none';
+          const el = document.getElementById('page-error');
+          el.textContent = 'Failed to load project: ' + e;
+          el.style.display = '';
+        });
+    }
+
+    function approve(reviewId) {
+      document.getElementById('review-error').innerHTML = '';
+      fetch('/review/' + reviewId + '/approve', { method: 'POST' })
+        .then(r => r.json().then(d => ({ status: r.status, data: d })))
+        .then(({ status, data }) => {
+          if (status === 200) {
+            document.getElementById('review-confirm').innerHTML =
+              '<p class="confirm">Approved.</p>';
+            load();
+          } else {
+            document.getElementById('review-error').innerHTML =
+              `<div class="error">Error ${status}: ${data.detail || JSON.stringify(data)}</div>`;
+          }
+        })
+        .catch(() => {
+          document.getElementById('review-error').innerHTML =
+            '<div class="error">Could not reach backend.</div>';
+        });
+    }
+
+    function reject(reviewId) {
+      document.getElementById('review-error').innerHTML = '';
+      fetch('/review/' + reviewId + '/reject', { method: 'POST' })
+        .then(r => r.json().then(d => ({ status: r.status, data: d })))
+        .then(({ status, data }) => {
+          if (status === 200) {
+            document.getElementById('review-confirm').innerHTML =
+              '<p class="confirm">Rejected.</p>';
+            load();
+          } else {
+            document.getElementById('review-error').innerHTML =
+              `<div class="error">Error ${status}: ${data.detail || JSON.stringify(data)}</div>`;
+          }
+        })
+        .catch(() => {
+          document.getElementById('review-error').innerHTML =
+            '<div class="error">Could not reach backend.</div>';
+        });
+    }
+
+    document.getElementById('client-add-link').href = '/ui/projects/' + projectId + '/new/client';
+    document.getElementById('property-add-link').href = '/ui/projects/' + projectId + '/new/property';
+
+    load();
+  </script>
+</body>
+</html>
