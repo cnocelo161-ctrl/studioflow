@@ -7,3 +7,17 @@
 secrets/
 agents/main/agent/auth-profiles.json
 .venv/
+# python
+__pycache__/
+*.pyc
+
+# backups
+backups/
+*.zip
+
+# runtime data
+studioflow/data/
+studioflow/logs/
+
+# temp / lock
+*.lock
