@@ -25,8 +25,7 @@ N8N_BASE_URL=https://robertnocelo.app.n8n.cloud
 N8N_API_KEY=your_n8n_api_key
 ```
 ## Run
-
 ```bash
+cp input.template.json input.json
 python main.py
-```
 
