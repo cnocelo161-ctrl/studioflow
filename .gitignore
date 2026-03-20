@@ -21,3 +21,4 @@ studioflow/logs/
 
 # temp / lock
 *.lock
+input.json
