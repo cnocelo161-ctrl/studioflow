@@ -4,3 +4,4 @@ __pycache__/
 .env
 
 agents/main/agent/auth-profiles.json
+agents/main/agent/auth-profiles.json
